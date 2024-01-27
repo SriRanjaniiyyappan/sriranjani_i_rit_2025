@@ -1,0 +1,74 @@
+#Kristen loves playing with and comparing numbers. She thinks that if she takes two different positive numbers, the one whose digits sum to a larger number is better than the other. If the sum of digits is equal for both numbers, then she thinks the smaller number is better. For example, Kristen thinks that  is better than  and that  is better than .
+
+#Given an integer, , can you find the divisor of  that Kristin will consider to be the best?
+
+#Input Format
+
+#A single integer denoting .
+
+#Constraints
+
+#Output Format
+
+#Print an integer denoting the best divisor of .
+
+#Sample Input 0
+
+#12
+#Sample Output 0
+
+#6
+
+
+    
+answer:
+
+#include <stdio.h>
+
+
+int sumOfDigits(int num) {
+    int sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+    return sum;
+}
+
+
+int findBestDivisor(int n) {
+    int bestDivisor = 1;
+    int maxSum = 0;
+
+   
+    for (int i = 1; i <= n; i++) {
+        if (n % i == 0) {
+            // Calculate the sum of digits for the current divisor
+            int currentSum = sumOfDigits(i);
+
+            
+            if (currentSum > maxSum || (currentSum == maxSum && i < bestDivisor)) {
+                maxSum = currentSum;
+                bestDivisor = i;
+            }
+        }
+    }
+
+    return bestDivisor;
+}
+
+int main() {
+    int n;
+
+   
+    scanf("%d", &n);
+
+   
+    int result = findBestDivisor(n);
+    printf("%d\n", result);
+
+    return 0;
+}
+
+ 
+
